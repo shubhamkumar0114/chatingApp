@@ -1,4 +1,4 @@
-import { useFileHandler, useInputValidation } from "6pp";
+import { useInputValidation } from "6pp";
 import { CameraAlt as CameraAltIcon } from "@mui/icons-material";
 import {
   Avatar,
@@ -12,12 +12,12 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { VisuallyHiddenInput } from "../components/styles/StyledComponent";
 import { server } from "../constants/config";
 import { userExist } from "../redux/reducers/auth";
 import { userValidator } from "../utils/Validators";
-import toast, { LoaderIcon } from "react-hot-toast";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -88,6 +88,7 @@ const Login = () => {
         },
       );
       dispatch(userExist(true));
+      console.log(res)
       toast.success(res?.data.message);
     } catch (error) {
       toast.error(error?.response?.data?.message);
