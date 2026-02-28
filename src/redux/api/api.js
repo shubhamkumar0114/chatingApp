@@ -3,7 +3,7 @@ import { server } from "../../constants/config";
 
 const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1`,credentials: "include" }),
   tagTypes: ["Chat", "User", "Message"],
 
   endpoints: (builder) => ({
@@ -11,7 +11,6 @@ const api = createApi({
     myChats: builder.query({
       query: () => ({
         url: "/chat/my",
-        credentials: "include",
       }),
       providesTags: ["Chat"],
     }),
@@ -19,7 +18,6 @@ const api = createApi({
     searchUsers: builder.query({
       query: (name) => ({
         url: `/user/search?name=${name}`,
-        credentials: "include",
       }),
       providesTags: ["User"],
     }),
@@ -29,7 +27,6 @@ const api = createApi({
       query: (data) => ({
         url: "/user/sendrequest",
         method: "PUT",
-        credentials: "include",
         body: data,
       }),
       invalidatesTags: ["User"],
@@ -40,7 +37,6 @@ const api = createApi({
       query: () => ({
         url: "/user/notifications",
         method: "GET",
-        credentials: "include",
       }),
       keepUnusedDataFor: 0,
     }),
@@ -50,7 +46,6 @@ const api = createApi({
       query: (data) => ({
         url: "/user/acceptrequest",
         method: "PUT",
-        credentials: "include",
         body: data,
       }),
       invalidatesTags: ["Chat"],
@@ -62,8 +57,7 @@ const api = createApi({
         if (populate) url += "?populate=true";
 
         return {
-          url,
-          credentials: "include",
+          url
         };
       },
       providesTags: ["Chat"],
@@ -72,8 +66,7 @@ const api = createApi({
     getMessagges: builder.query({
       query: ({ chatId, page }) => ({
         url: `/chat/message/${chatId}?page=${page}`,
-        method: "GET",
-        credentials: "include",
+        method: "GET"
       }),
       keepUnusedDataFor: 0,
     }),
@@ -82,7 +75,6 @@ const api = createApi({
       query: (data) => ({
         url: `/chat/message`,
         method: "POST",
-        credentials: "include",
         body: data,
       }),
     }),
@@ -91,7 +83,6 @@ const api = createApi({
       query: (data) => ({
         url: "/chat/mygroup",
         method: "GET",
-        credentials: "include",
       }),
       providesTags: ["Chat"],
     }),
@@ -102,7 +93,6 @@ const api = createApi({
         if (chatId) url += `?chatId=${chatId}`;
         return {
           url,
-          credentials: "include",
         };
       },
       providesTags: ["User"],
@@ -112,8 +102,7 @@ const api = createApi({
       query: ({ name, members }) => ({
         url: "/chat/new",
         method: "POST",
-        body: { name, members },
-        credentials: "include",
+        body: { name, members }
       }),
       providesTags: ["Chat"],
     }),
@@ -121,8 +110,7 @@ const api = createApi({
       query: ({ chatId, name }) => ({
         url: `/chat/${chatId}`,
         method: "PUT",
-        body: { name },
-        credentials: "include",
+        body: { name }
       }),
       providesTags: ["Chat"],
     }),
@@ -130,8 +118,7 @@ const api = createApi({
       query: ({ chatId, userId }) => ({
         url: `/chat/removemembers`,
         method: "PUT",
-        body: { chatId, userId },
-        credentials: "include",
+        body: { chatId, userId }
       }),
       providesTags: ["Chat"],
     }),
@@ -139,17 +126,15 @@ const api = createApi({
       query: ({ members, chatId }) => ({
         url: `/chat/addmembers`,
         method: "PUT",
-        body: { members, chatId },
-        credentials: "include",
+        body: { members, chatId }
       }),
       providesTags: ["Chat"],
     }),
 
-     deleteGroups: builder.mutation({
-      query: (chatId ) => ({
+    deleteGroups: builder.mutation({
+      query: (chatId) => ({
         url: `/chat/${chatId}`,
         method: "DELETE",
-        credentials: "include",
       }),
       providesTags: ["Chat"],
     }),
@@ -172,5 +157,5 @@ export const {
   useRenameGroupsMutation,
   useRemoveGroupMembersMutation,
   useAddGroupMembersMutation,
-  useDeleteGroupsMutation
+  useDeleteGroupsMutation,
 } = api;
