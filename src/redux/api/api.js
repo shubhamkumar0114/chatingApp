@@ -3,7 +3,7 @@ import { server } from "../../constants/config";
 
 const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1`,credentials: "include" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1`}),
   tagTypes: ["Chat", "User", "Message"],
 
   endpoints: (builder) => ({
@@ -11,6 +11,7 @@ const api = createApi({
     myChats: builder.query({
       query: () => ({
         url: "/chat/my",
+        credentials: "include"
       }),
       providesTags: ["Chat"],
     }),
@@ -18,6 +19,7 @@ const api = createApi({
     searchUsers: builder.query({
       query: (name) => ({
         url: `/user/search?name=${name}`,
+        credentials: "include",
       }),
       providesTags: ["User"],
     }),
@@ -26,6 +28,7 @@ const api = createApi({
     sendFriendRequest: builder.mutation({
       query: (data) => ({
         url: "/user/sendrequest",
+        credentials: "include",
         method: "PUT",
         body: data,
       }),
@@ -36,6 +39,7 @@ const api = createApi({
     getNotifications: builder.query({
       query: () => ({
         url: "/user/notifications",
+        credentials: "include",
         method: "GET",
       }),
       keepUnusedDataFor: 0,
@@ -45,6 +49,7 @@ const api = createApi({
     acceptFriendRequest: builder.mutation({
       query: (data) => ({
         url: "/user/acceptrequest",
+        credentials: "include",
         method: "PUT",
         body: data,
       }),
@@ -57,7 +62,8 @@ const api = createApi({
         if (populate) url += "?populate=true";
 
         return {
-          url
+          url,
+          credentials: "include",
         };
       },
       providesTags: ["Chat"],
@@ -66,6 +72,7 @@ const api = createApi({
     getMessagges: builder.query({
       query: ({ chatId, page }) => ({
         url: `/chat/message/${chatId}?page=${page}`,
+        credentials: "include",
         method: "GET"
       }),
       keepUnusedDataFor: 0,
@@ -74,6 +81,7 @@ const api = createApi({
     sendAttachments: builder.mutation({
       query: (data) => ({
         url: `/chat/message`,
+        credentials: "include",
         method: "POST",
         body: data,
       }),
@@ -82,6 +90,7 @@ const api = createApi({
     getMyGroups: builder.query({
       query: (data) => ({
         url: "/chat/mygroup",
+        credentials: "include",
         method: "GET",
       }),
       providesTags: ["Chat"],
@@ -93,6 +102,7 @@ const api = createApi({
         if (chatId) url += `?chatId=${chatId}`;
         return {
           url,
+          credentials: "include",
         };
       },
       providesTags: ["User"],
@@ -101,6 +111,7 @@ const api = createApi({
     newGroups: builder.mutation({
       query: ({ name, members }) => ({
         url: "/chat/new",
+        credentials: "include",
         method: "POST",
         body: { name, members }
       }),
@@ -109,6 +120,7 @@ const api = createApi({
     renameGroups: builder.mutation({
       query: ({ chatId, name }) => ({
         url: `/chat/${chatId}`,
+        credentials: "include",
         method: "PUT",
         body: { name }
       }),
@@ -117,6 +129,7 @@ const api = createApi({
     removeGroupMembers: builder.mutation({
       query: ({ chatId, userId }) => ({
         url: `/chat/removemembers`,
+        credentials: "include",
         method: "PUT",
         body: { chatId, userId }
       }),
@@ -125,6 +138,7 @@ const api = createApi({
     addGroupMembers: builder.mutation({
       query: ({ members, chatId }) => ({
         url: `/chat/addmembers`,
+        credentials: "include",
         method: "PUT",
         body: { members, chatId }
       }),
@@ -134,6 +148,7 @@ const api = createApi({
     deleteGroups: builder.mutation({
       query: (chatId) => ({
         url: `/chat/${chatId}`,
+        credentials: "include",
         method: "DELETE",
       }),
       providesTags: ["Chat"],

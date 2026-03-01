@@ -31,6 +31,7 @@ const Login = () => {
   const [loading , setLoading] = useState(false);
   const dispatch = useDispatch();
 
+
   const avatarChangeHandler = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -65,6 +66,7 @@ const Login = () => {
       toast.success(data?.message);
        setLoading(false)
     } catch (error) {
+      console.log(error)
       toast.error(error?.response?.data.message);
     }
   };
@@ -72,7 +74,7 @@ const Login = () => {
   // ----------------------Login------------------------------
   const handleLogin = async (e) => {
     e.preventDefault();
-
+      console.log(username.value , password.value)
     try {
       const res = await axios.post(
         `${server}/api/v1/user/login`,
@@ -86,11 +88,12 @@ const Login = () => {
             "Content-Type": "application/json",
           },
         },
-      );
+      ); console.log("pass2")
       dispatch(userExist(true));
       console.log(res)
       toast.success(res?.data.message);
     } catch (error) {
+      console.log(error)
       toast.error(error?.response?.data?.message);
     }
   };
