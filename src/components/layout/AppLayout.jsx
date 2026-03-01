@@ -1,28 +1,28 @@
 import { Drawer, Grid, Skeleton } from "@mui/material";
 import { lazy, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useErrors, useSocketEvents } from "../../hooks/Hooks.jsx";
-import { useMyChatsQuery } from "../../redux/api/api.js";
-import {
-  setIsDeleteMenu,
-  setIsMobileMenuFriend,
-  setSelectedDeleteChat,
-} from "../../redux/reducers/miscSlice.js";
-import Title from "../../shared/Title";
-import Profile from "../specific/Profile";
-import Header from "./Header";
+import { useLocation, useParams } from "react-router-dom";
 import { getSocket } from "../../Socket.jsx";
 import {
   NEW_MESSAGE_ALERT,
   NEW_REQUEST,
   REFETCH_CHAT,
 } from "../../constants/event.js";
+import { useErrors, useSocketEvents } from "../../hooks/Hooks.jsx";
+import { useMyChatsQuery } from "../../redux/api/api.js";
 import {
   incrementNotification,
   setMessagesAlert,
 } from "../../redux/reducers/chat.js";
+import {
+  setIsDeleteMenu,
+  setIsMobileMenuFriend,
+  setSelectedDeleteChat,
+} from "../../redux/reducers/miscSlice.js";
+import Title from "../../shared/Title";
 import DeleteChatMenu from "../dialogs/DeleteChatMenu.jsx";
+import Profile from "../specific/Profile";
+import Header from "./Header";
 const Chatlist = lazy(() => import("../specific/Chatlist"));
 
 const AppLayout = () => (WrappedComponent) => {
@@ -31,6 +31,8 @@ const AppLayout = () => (WrappedComponent) => {
     const chatId = params.chatId;
     const dispatch = useDispatch();
     const deleteMunuAnchors = useRef(null);
+    const location = useLocation();
+    const isLocation = location.pathname === `/chat/${chatId}`
 
     const socket = getSocket();
 
@@ -76,6 +78,7 @@ const AppLayout = () => (WrappedComponent) => {
     return (
       <>
         <Title />
+        {/* {isLocation ? "shubham" : <Header />} */}
         <Header />
 
         <DeleteChatMenu deleteMenuAnchor={deleteMunuAnchors} />

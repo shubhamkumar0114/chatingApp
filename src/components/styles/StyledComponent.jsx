@@ -25,8 +25,8 @@ export const Link = styled(LinkComponents)`
 
 export  const InputBox = styled("input")`
   width: 100%;
-  height: 100%;
-  border: 0.3px solid gray;
+  height: 80%;
+  border: 0.2px solid lightgray;
   outline: none;
   padding: 0rem 2rem;
   font-size: "18px";

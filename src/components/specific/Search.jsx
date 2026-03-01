@@ -47,10 +47,11 @@ const Search = () => {
   }, [search.value]);
   return (
     <Dialog open={isSearch} onClose={handleSearchClose}>
-      <Stack p={"2rem"} direction={"column"} width={"25rem"} height={"20rem"}>
+      <Stack p={"1rem"} direction={"column"} width={"20rem"} height={"9rem"}>
         <DialogTitle textAlign={"center"}>Find People</DialogTitle>
         <TextField
           label=""
+          style={{width: "100%", outline: "none", border: "none"}}
           value={search.value}
           onChange={search.changeHandler}
           variant="outlined"

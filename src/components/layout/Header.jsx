@@ -1,4 +1,12 @@
 import {
+  Add as AddIcon,
+  Group as GroupIcon,
+  Menu as MenuIcon,
+  Notifications as NotificationIcon,
+  PermIdentity,
+  Search as SearchIcon
+} from "@mui/icons-material";
+import {
   AppBar,
   Backdrop,
   Badge,
@@ -6,28 +14,17 @@ import {
   IconButton,
   Toolbar,
   Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
-import React, { lazy, Suspense, useState } from "react";
-import { toast } from "react-hot-toast"
-import axios from "axios"
+import { lazy, Suspense } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { orange } from "../../constants/color";
-import { server } from "../../constants/config.js"
-import {
-  Menu as MenuIcon,
-  Search as SearchIcon,
-  Add as AddIcon,
-  Group as GroupIcon,
-  Logout as LogoutIcon,
-  Notifications as NotificationIcon,
-
-} from "@mui/icons-material";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
-import { userNoExist } from "../../redux/reducers/auth.js"
-import { setIsMobileMenuFriend, setIsNotification, setIsSearch, setIsNewGroup } from "../../redux/reducers/miscSlice.js";
 import { resetNotifications } from "../../redux/reducers/chat.js";
+import { setIsMobileMenuFriend, setIsNewGroup, setIsNotification, setIsProfile, setIsSearch } from "../../redux/reducers/miscSlice.js";
 
+
+const MobileProfileDialog = lazy(()=> import("../specific/MobileProfile.jsx")) ;
 const SearchDialog = lazy(() => import("../specific/Search"));
 const NotificationDialog = lazy(() => import("../specific/Notification"));
 const NewGroupDialog = lazy(() => import("../specific/NewGroup"));
@@ -35,8 +32,9 @@ const NewGroupDialog = lazy(() => import("../specific/NewGroup"));
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const {user} = useSelector((state)=> state.auth);
 
-  const { isSearch, isNotification, isNewGroup } = useSelector(state => state.misc)
+  const { isSearch, isNotification, isNewGroup, isProfile} = useSelector(state => state.misc)
   const { chatNotificationCount } = useSelector(state => state.chat)
 
   const handleMobile = () => {
@@ -52,17 +50,11 @@ const Header = () => {
     dispatch(setIsNotification(true))
     dispatch(resetNotifications())
   }
-  const logoutHandler = async () => {
-    try {
-      const res = await axios.get(`${server}/api/v1/user/logout`, { withCredentials: true })
-      localStorage.removeItem("token");
-      dispatch(userNoExist())
-      toast.success(res?.data?.message)
-    } catch (error) {
-      toast.error(error?.response?.data?.message)
-    }
-  }
+ 
   const navigateToGroup = () => navigate("/groups");
+
+  const openProfileHandler = ()=> dispatch(setIsProfile(true))
+  
 
   return (
     <>
@@ -120,11 +112,12 @@ const Header = () => {
                 value={chatNotificationCount}
               />
 
-              <IconBtn
-                title={"Logput"}
-                icons={<LogoutIcon />}
-                onClick={logoutHandler}
-              />
+              {user && <IconBtn
+                title={"Profile"}
+                icons={<PermIdentity sx={{display: { xs: "block", lg: "none" }}} />}
+                onClick={openProfileHandler}
+              />}
+               
             </Box>
           </Toolbar>
         </AppBar>
@@ -145,6 +138,12 @@ const Header = () => {
       {isNewGroup && (
         <Suspense fallback={<Backdrop open />}>
           <NewGroupDialog />
+        </Suspense>
+      )}
+
+      {isProfile && (
+        <Suspense fallback={<Backdrop open />}>
+          <MobileProfileDialog />
         </Suspense>
       )}
     </>

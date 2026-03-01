@@ -79,6 +79,7 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
               WebkitBoxOrient: "vertical",
               overflow: "hidden",
               textOverflow: "ellipsis",
+          
             }}
           >
             {`${name} send you a friend request`}

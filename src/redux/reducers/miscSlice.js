@@ -13,6 +13,7 @@ const initialState = {
     chatId: "",
     groupChat: false,
   },
+  isProfile: false,
 };
 
 const miscSlice = createSlice({
@@ -46,6 +47,9 @@ const miscSlice = createSlice({
     setSelectedDeleteChat: (state, action) => {
       state.selectedDeleteChat = action.payload;
     },
+    setIsProfile: (state , action)=> {
+      state.isProfile = action.payload;
+    }
   },
 });
 export default miscSlice;
@@ -59,4 +63,5 @@ export const {
   setIsFileMenu,
   setUploadingLoader,
   setSelectedDeleteChat,
+  setIsProfile
 } = miscSlice.actions;

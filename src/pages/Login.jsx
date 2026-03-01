@@ -67,15 +67,15 @@ const Login = () => {
       toast.success(data?.message);
       setLoading(false)
     } catch (error) {
-      console.log(error)
       toast.error(error?.response?.data.message);
+    }finally{
+      setLoading(false)
     }
   };
 
   // ----------------------Login------------------------------
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(username.value, password.value)
     try {
       const res = await axios.post(
         `${server}/api/v1/user/login`,
@@ -92,10 +92,8 @@ const Login = () => {
       );
       localStorage.setItem("token", res?.data?.token);
       dispatch(userExist(res?.data?.user));
-      console.log(res)
       toast.success(res?.data.message);
     } catch (error) {
-      console.log(error)
       toast.error(error?.response?.data?.message);
     }
   };
