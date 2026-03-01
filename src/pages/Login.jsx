@@ -28,7 +28,7 @@ const Login = () => {
   const password = useInputValidation("");
   const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
-  const [loading , setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
 
@@ -62,9 +62,10 @@ const Login = () => {
           },
         },
       );
-      dispatch(userExist(true));
+      localStorage.setItem("token", data?.token);
+      dispatch(userExist(data?.user));
       toast.success(data?.message);
-       setLoading(false)
+      setLoading(false)
     } catch (error) {
       console.log(error)
       toast.error(error?.response?.data.message);
@@ -74,7 +75,7 @@ const Login = () => {
   // ----------------------Login------------------------------
   const handleLogin = async (e) => {
     e.preventDefault();
-      console.log(username.value , password.value)
+    console.log(username.value, password.value)
     try {
       const res = await axios.post(
         `${server}/api/v1/user/login`,
@@ -88,8 +89,9 @@ const Login = () => {
             "Content-Type": "application/json",
           },
         },
-      ); console.log("pass2")
-      dispatch(userExist(true));
+      );
+      localStorage.setItem("token", res?.data?.token);
+      dispatch(userExist(res?.data?.user));
       console.log(res)
       toast.success(res?.data.message);
     } catch (error) {
@@ -282,7 +284,7 @@ const Login = () => {
                 fullWidth
                 type="submit"
               >
-                {loading? <LoaderIcon/> : "Register"}
+                {loading ? <LoaderIcon /> : "Register"}
               </Button>
 
               <Typography textAlign={"center"} m={"1rem"}>

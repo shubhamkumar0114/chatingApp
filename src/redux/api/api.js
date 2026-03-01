@@ -3,7 +3,16 @@ import { server } from "../../constants/config";
 
 const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1`}),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${server}/api/v1`,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ["Chat", "User", "Message"],
 
   endpoints: (builder) => ({

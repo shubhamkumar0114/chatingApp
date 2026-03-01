@@ -9,10 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { lazy, Suspense, useState } from "react";
-import {toast} from "react-hot-toast"
+import { toast } from "react-hot-toast"
 import axios from "axios"
 import { orange } from "../../constants/color";
-import {server} from "../../constants/config.js"
+import { server } from "../../constants/config.js"
 import {
   Menu as MenuIcon,
   Search as SearchIcon,
@@ -20,12 +20,12 @@ import {
   Group as GroupIcon,
   Logout as LogoutIcon,
   Notifications as NotificationIcon,
-  
+
 } from "@mui/icons-material";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux"
-import {userNoExist} from "../../redux/reducers/auth.js"
-import { setIsMobileMenuFriend, setIsNotification, setIsSearch ,setIsNewGroup } from "../../redux/reducers/miscSlice.js";
+import { useDispatch, useSelector } from "react-redux"
+import { userNoExist } from "../../redux/reducers/auth.js"
+import { setIsMobileMenuFriend, setIsNotification, setIsSearch, setIsNewGroup } from "../../redux/reducers/miscSlice.js";
 import { resetNotifications } from "../../redux/reducers/chat.js";
 
 const SearchDialog = lazy(() => import("../specific/Search"));
@@ -36,8 +36,8 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
-  const {isSearch , isNotification , isNewGroup} = useSelector(state => state.misc)
-  const {chatNotificationCount} = useSelector(state => state.chat)
+  const { isSearch, isNotification, isNewGroup } = useSelector(state => state.misc)
+  const { chatNotificationCount } = useSelector(state => state.chat)
 
   const handleMobile = () => {
     dispatch(setIsMobileMenuFriend(true))
@@ -48,13 +48,14 @@ const Header = () => {
   const openNewGroup = () => {
     dispatch(setIsNewGroup(true))
   };
-   const openNotification = () => {
+  const openNotification = () => {
     dispatch(setIsNotification(true))
     dispatch(resetNotifications())
-   }
-  const logoutHandler = async()=> {
+  }
+  const logoutHandler = async () => {
     try {
-      const res = await axios.get(`${server}/api/v1/user/logout`, {withCredentials: true})
+      const res = await axios.get(`${server}/api/v1/user/logout`, { withCredentials: true })
+      localStorage.removeItem("token");
       dispatch(userNoExist())
       toast.success(res?.data?.message)
     } catch (error) {
@@ -150,11 +151,11 @@ const Header = () => {
   );
 };
 
-const IconBtn = ({ title, icons, onClick , value }) => {
+const IconBtn = ({ title, icons, onClick, value }) => {
   return (
     <Tooltip title={title}>
       <IconButton color="inherit" size="large" onClick={onClick}>
-        {value? <Badge badgeContent={value} color="error">{icons}</Badge>: icons}
+        {value ? <Badge badgeContent={value} color="error">{icons}</Badge> : icons}
       </IconButton>
     </Tooltip>
   );

@@ -26,10 +26,17 @@ const App = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      const token = localStorage.getItem("token");
       axios
-        .get(`${server}/api/v1/user/me`, { withCredentials: true })
+        .get(`${server}/api/v1/user/me`, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` }
+        })
         .then(({ data }) => dispatch(userExist(data.user)))
-        .catch((err) => dispatch(userNoExist()));
+        .catch((err) => {
+          localStorage.removeItem("token");
+          dispatch(userNoExist());
+        });
     };
     fetchProfile();
   }, [userNoExist]);

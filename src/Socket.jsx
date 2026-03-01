@@ -8,7 +8,10 @@ const getSocket = () => useContext(SocketContext);
 
 const SocketProvider = ({ children }) => {
   const socket = useMemo(
-    () => io(server, { withCredentials: true }),
+    () => io(server, {
+      withCredentials: true,
+      auth: { token: localStorage.getItem("token") }
+    }),
     [],
   );
   return (
