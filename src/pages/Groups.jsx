@@ -140,6 +140,7 @@ const Groups = () => {
             position: "fixed",
             right: "1rem",
             top: "1rem",
+            color: "white"
           },
         }}
       >
@@ -153,6 +154,7 @@ const Groups = () => {
             top: "0.9rem",
             left: "0.9rem",
             cursor: "pointer",
+            color: "white"
           }}
           onClick={navigateBack}
         >
@@ -174,11 +176,15 @@ const Groups = () => {
       {isEdit ? (
         <>
           <TextField
+           sx={{color: "white"}}
+           InputProps={{
+            style: {color: "white"}
+           }}
             placeholder="group name"
             value={groupNameUpdateValue}
             onChange={(e) => setGroupNameUpdateValue(e.target.value)}
           />
-          <IconButton onClick={updateGroupName}>
+          <IconButton onClick={updateGroupName} sx={{color: "white"}}>
             <DoneIcon />
           </IconButton>
         </>
@@ -224,11 +230,15 @@ const Groups = () => {
         xs: "row-reverse",
       }}
       spacing={"1rem"}
-      padding={{ sm: "1rem", xs: "0", md: "1rem 4rem" }}
+      padding={{ sm: "1rem", xs: "0rem", md: "1rem 2rem" }}
+      sx={{
+        marginTop: "2rem",
+        marginLeft: "4rem"
+      }}
     >
       <Button
         size="large"
-        color="error"
+        color="gray"
         startIcon={<DeleteIcon />}
         onClick={openConfirmDeleteHandler}
       >
@@ -253,6 +263,7 @@ const Groups = () => {
         sx={{
           display: { xs: "none", sm: "block" },
           bgcolor: "bisque",
+          color: "white"
         }}
       >
         <GroupList myGroups={myGroups.data?.groups} chatId={chatId} />
@@ -262,6 +273,7 @@ const Groups = () => {
         sx={{
           padding: "1rem 1rem",
           position: "relative",
+          color: "white"
         }}
       >
         {IconBtn}
@@ -274,7 +286,8 @@ const Groups = () => {
               variant="h6"
               style={{
                 alignItems: "center",
-                margin: " 1rem 4rem",
+                margin: "1rem 4rem",
+                color: "white"
               }}
             >
               Members
@@ -286,14 +299,16 @@ const Groups = () => {
               width={"100%"}
               boxSizing={"border-box"}
               padding={{
-                sm: "1rem",
+                sm: "0.2rem",
                 xs: "0",
                 md: "1rem 2rem",
               }}
               spacing={"2rem"}
-              bgcolor={"bisque"}
+              bgcolor={"DarkSlateGray"}
+              color={"white"}
               overflow={"auto"}
-              height={"54vh"}
+              // height={"54vh"}
+              border={"1px solid gray"}
             >
               {/* -------------Member-show----------- */}
               {groupDetails.data?.chat.members?.map((i) => (
@@ -332,10 +347,17 @@ const Groups = () => {
         sx={{
           display: { xs: "block", sm: "none" },
         }}
+        PaperProps={{
+              sx: {
+                backgroundColor: "#2F5F5F",
+                color: "white",
+                width: "60vw"
+              },
+            }}
         open={isMobileMenuOpen}
         onClose={handleMobileClose}
       >
-        <GroupList w={"50%"} myGroups={myGroups.data?.groups} chatId={chatId} />
+        <GroupList w={"60%"} myGroups={myGroups.data?.groups} chatId={chatId} />
       </Drawer>
     </Grid>
   );

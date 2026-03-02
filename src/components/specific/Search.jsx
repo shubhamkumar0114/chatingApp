@@ -47,7 +47,7 @@ const Search = () => {
   }, [search.value]);
   return (
     <Dialog open={isSearch} onClose={handleSearchClose}>
-      <Stack p={"1rem"} direction={"column"} width={"20rem"} height={"9rem"}>
+      <Stack p={"1rem"} direction={"column"} sx={{ backgroundColor: "#2F5F5F", color: "white" }} width={"20rem"} height={"9rem"}>
         <DialogTitle textAlign={"center"}>Find People</DialogTitle>
         <TextField
           label=""
@@ -57,6 +57,7 @@ const Search = () => {
           variant="outlined"
           size="small"
           InputProps={{
+            style: { color: "white" },
             startAdornment: (
               <InputAdornment position="start">
                 <SearchIcon />
@@ -66,7 +67,7 @@ const Search = () => {
         />
       </Stack>
 
-      <List>
+      <List sx={{ backgroundColor: "#2F5F5F", color: "white" }}>
         {users?.map((user) => (
           <UserItem
             user={user}

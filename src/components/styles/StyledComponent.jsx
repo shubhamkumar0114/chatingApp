@@ -26,13 +26,14 @@ export const Link = styled(LinkComponents)`
 export  const InputBox = styled("input")`
   width: 100%;
   height: 80%;
-  border: 0.2px solid lightgray;
+  border: 0.2px solid gray;
   outline: none;
-  padding: 0rem 2rem;
-  font-size: "18px";
+  padding: 1rem 2rem;
+  font-size: "21px";
   margin: 0.4rem 0.4rem;
   border-radius: 1.5rem;
-  background-color: ${grayColor}
+  background-color: DarkSlateGray;
+  color: white;
 
 `
 

@@ -131,7 +131,7 @@ const Chat = ({ chatId, user }) => {
 
   return (
     <>
-      <Stack
+      <Stack className="scrollbar"
         ref={containerRef}
         boxSizing={"border-box"}
         padding={"0.5rem"}
@@ -140,6 +140,7 @@ const Chat = ({ chatId, user }) => {
         sx={{
           overflowX: "hidden",
           overflowY: "scroll",
+          backgroundColor: "DarkSlateGray"
         }}
       >
         {/* ----------------message-render--------------- */}
@@ -175,6 +176,8 @@ const Chat = ({ chatId, user }) => {
             sx={{
               rotate: "30deg",
               marginLeft: "0.3rem",
+              backgroundColor: "GrayText",
+              color: "white"
             }}
             onClick={handleFileOpen}
           >
@@ -190,8 +193,9 @@ const Chat = ({ chatId, user }) => {
           <IconButton
             type="submit"
             sx={{
-              backgroundColor: "#ea7070",
+              backgroundColor: "GrayText",
               color: "white",
+              fontSize: "0.5rem",
               marginRight: "0.3rem",
               "&:hover": {
                 backgroundColor: "error.dark",

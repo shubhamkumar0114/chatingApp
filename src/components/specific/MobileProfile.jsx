@@ -39,18 +39,18 @@ const MobileProfile = () => {
     <Dialog
       open={isProfile}
       onClose={closeProfileHandler}
-      style={{ marginTop: "1.5rem" }}
+      style={{ marginTop: "1.5rem"}}
     >
-      <Stack width={"100vw"} spacing={"1rem"} padding={"1rem"}>
-        <Typography sx={{ fontSize: "1.3rem" }}>Profile</Typography>
+      <Stack width={"80vw"} spacing={"1rem"} sx={{backgroundColor: "DarkSlateGray"}} padding={"1rem"}>
+        <Typography sx={{ fontSize: "1.3rem", color: "white" }}>Profile</Typography>
         <Avatar
           src={transFormImage(user?.avatar?.url)}
           sx={{
-            width: "120px",
-            height: "120px",
+            width: "100px",
+            height: "100px",
             objectFit: "contain",
             marginBottom: "1rem",
-            border: "5px solid black",
+            border: "2px solid black",
           }}
         />
 
@@ -77,11 +77,11 @@ const MobileProfile = () => {
           {" "}
           <Logout
             sx={{
-              fontSize: "2.9rem",
+              fontSize: "2.3rem",
               color: "white",
               borderRadius: "0.4rem",
-              backgroundColor: "red",
-              padding: "0.7rem",
+              backgroundColor: "Crimson",
+              padding: "0.5rem",
               marginBottom: "0.5rem",
             }}
           />{" "}
@@ -98,23 +98,23 @@ const ProfileCard = ({ text, Icon, heading }) => (
       gap: "1rem",
       justifyContent: "start",
       alignItems: "center",
-      spacing: "1.6rem",
-      color: "black",
+      spacing: "1.3rem",
+      color: "Cornsilk",
       textAlign: "start",
-      backgroundColor: "AntiqueWhite",
+      backgroundColor: "#2F5F5F",
       borderRadius: "0.4rem",
       padding: "0.4rem",
     }}
     direction={"row"}
   >
-    <Stack marginTop={"1.3rem"} fontSize={"1.3rem"} marginRight={"0.4rem"}>
+    <Stack marginTop={"1.3rem"} fontSize={"1.3rem"} color={"GhostWhite"} marginRight={"0.4rem"}>
       {Icon && Icon}
     </Stack>
     <Stack direction={"column-reverse"}>
-      <Typography variant="body1" sx={{ fontSize: "1.3rem" }}>
+      <Typography variant="body1" sx={{ fontSize: "1rem", color: "GhostWhite" }}>
         {text}
       </Typography>
-      <Typography color="black" sx={{ fontSize: "1.2rem" }} variant="caption">
+      <Typography color="black" sx={{ fontSize: "1rem", color: "GhostWhite" }} variant="caption">
         {heading}
       </Typography>
     </Stack>

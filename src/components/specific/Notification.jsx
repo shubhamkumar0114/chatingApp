@@ -40,7 +40,7 @@ const Notification = () => {
   useErrors([{error , isError}])
   return (
     <Dialog open={isNotification} onClose={closeHandle}>
-      <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
+      <Stack p={{ xs: "1rem", sm: "2rem", }} sx={{backgroundColor: "#2F5F5F", color: "white"}} maxWidth={"25rem"}>
         <DialogTitle>Notification</DialogTitle>
 
        {

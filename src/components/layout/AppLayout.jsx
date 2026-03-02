@@ -32,7 +32,7 @@ const AppLayout = () => (WrappedComponent) => {
     const dispatch = useDispatch();
     const deleteMunuAnchors = useRef(null);
     const location = useLocation();
-    const isLocation = location.pathname === `/chat/${chatId}`
+    const isLocation = location.pathname === `/chat/${chatId}`;
 
     const socket = getSocket();
 
@@ -85,7 +85,16 @@ const AppLayout = () => (WrappedComponent) => {
         {isLoading ? (
           <Skeleton />
         ) : (
-          <Drawer open={isMobileMenuFriend} onClose={handleMobileClose}>
+          <Drawer
+            open={isMobileMenuFriend}
+            onClose={handleMobileClose}
+            PaperProps={{
+              sx: {
+                backgroundColor: "#2F5F5F",
+                color: "white",
+              },
+            }}
+          >
             <Chatlist
               w="70vw"
               chats={data?.chats}
@@ -102,6 +111,7 @@ const AppLayout = () => (WrappedComponent) => {
               width: 360, // fixed sidebar
               padding: "0 0.5rem",
               display: { xs: "none", md: "block" },
+              backgroundColor: "DarkSlateGray",
             }}
           >
             {isLoading ? (
@@ -120,6 +130,8 @@ const AppLayout = () => (WrappedComponent) => {
           <Grid
             sx={{
               flexGrow: 1,
+              backgroundColor: "DarkSlateGray",
+              borderLeft: "1px solid gray",
             }}
           >
             <WrappedComponent {...props} chatId={chatId} user={user} />

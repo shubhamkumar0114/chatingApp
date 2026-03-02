@@ -51,7 +51,7 @@ const App = () => {
               </SocketProvider>
             }
           >
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={user ? <Home />: <Login/>} />
             <Route path="/chat/:chatId" element={<Chat />} />
             <Route path="/groups" element={<Groups />} />
           </Route>

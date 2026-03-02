@@ -18,9 +18,9 @@ const MessageComponent = ({ message, user }) => {
     <div
       style={{
         alignSelf: sameSender ? "flex-end" : "flex-start",
-        backgroundColor: "white",
+        backgroundColor: "#2F5F5F",
         color: "black",
-        borderRadius: "6px",
+        borderRadius: "0.4rem",
         padding: "2px 8px",
         width: "fit-content",
         maxWidth: "60%",
@@ -33,7 +33,7 @@ const MessageComponent = ({ message, user }) => {
           {sender.name}
         </Typography>
       )}
-      {content && <Typography>{content}</Typography>}
+      {content && <Typography color="FloralWhite">{content}</Typography>}
 
       {/* attachments */}
       {attachments.length > 0 &&
@@ -50,7 +50,7 @@ const MessageComponent = ({ message, user }) => {
           );
         })}
 
-      <Typography variant="caption" color={"text.secondary"}>
+      <Typography variant="caption" color={"Cyan"}>
         {timeAgo}
       </Typography>
     </div>

@@ -18,6 +18,7 @@ import { VisuallyHiddenInput } from "../components/styles/StyledComponent";
 import { server } from "../constants/config";
 import { userExist } from "../redux/reducers/auth";
 import { userValidator } from "../utils/Validators";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,7 +31,7 @@ const Login = () => {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
 
   const avatarChangeHandler = (e) => {
     const file = e.target.files[0];
@@ -44,7 +45,7 @@ const Login = () => {
   // --------------------Signup Handler-----------------------
   const handleSign = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const formData = new FormData();
     formData.append("avatar", avatar);
     formData.append("name", name.value);
@@ -65,11 +66,11 @@ const Login = () => {
       localStorage.setItem("token", data?.token);
       dispatch(userExist(data?.user));
       toast.success(data?.message);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       toast.error(error?.response?.data.message);
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,6 +91,7 @@ const Login = () => {
           },
         },
       );
+      navigate("/");
       localStorage.setItem("token", res?.data?.token);
       dispatch(userExist(res?.data?.user));
       toast.success(res?.data.message);
@@ -103,7 +105,7 @@ const Login = () => {
       component={"main"}
       maxWidth="xs"
       sx={{
-        height: "100vh",
+        height: "100dvh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -118,6 +120,8 @@ const Login = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: "DarkSlateGray",
+          color: "white",
         }}
       >
         {isLogin ? (
@@ -128,6 +132,7 @@ const Login = () => {
               style={{
                 width: "100%",
                 marginTop: "12px",
+                color: "white",
               }}
             >
               <TextField
@@ -137,6 +142,14 @@ const Login = () => {
                 margin="normal"
                 variant="outlined"
                 value={username.value}
+                sx={{
+                  backgroundColor: "#2F5F5F",
+                  color: "white",
+                  "& label": { color: "white" },
+                }}
+                InputProps={{
+                  style: { color: "white" },
+                }}
                 onChange={username.changeHandler}
               />
 
@@ -148,7 +161,15 @@ const Login = () => {
                 margin="normal"
                 type="password"
                 variant="outlined"
+                sx={{
+                  backgroundColor: "#2F5F5F",
+                  color: "white",
+                  "& label": { color: "white" },
+                }}
                 value={password.value}
+                InputProps={{
+                  style: { color: "white" },
+                }}
                 onChange={password.changeHandler}
               />
               <Button
@@ -170,7 +191,7 @@ const Login = () => {
               <Button
                 variant="text"
                 fullWidth
-                color="primary"
+                color="white"
                 type="submit"
                 onClick={toggleLogin}
               >
@@ -205,7 +226,7 @@ const Login = () => {
                     right: 0,
                     bgcolor: "rgba(0,0,0,0.7)",
                     color: "white",
-                    ":hover": { bgcolor: "rgba(0,0,0,0.4)" },
+                    ":hover": { bgcolor: "rgba(0,0,0,0.2)" },
                   }}
                   component="label"
                 >
@@ -226,6 +247,14 @@ const Login = () => {
                 label="Name"
                 margin="normal"
                 variant="outlined"
+                InputProps={{
+                  style: { color: "white" },
+                }}
+                sx={{
+                  backgroundColor: "#2F5F5F",
+                  color: "white",
+                  "& label": { color: "white" },
+                }}
                 value={name.value}
                 onChange={name.changeHandler}
               />
@@ -237,6 +266,14 @@ const Login = () => {
                 label="Username"
                 margin="normal"
                 variant="outlined"
+                InputProps={{
+                  style: { color: "white" },
+                }}
+                sx={{
+                  backgroundColor: "#2F5F5F",
+                  color: "white",
+                  "& label": { color: "white" },
+                }}
                 value={username.value}
                 onChange={username.changeHandler}
               />
@@ -253,6 +290,14 @@ const Login = () => {
                 margin="normal"
                 type="text"
                 variant="outlined"
+                InputProps={{
+                  style: { color: "white" },
+                }}
+                sx={{
+                  backgroundColor: "#2F5F5F",
+                  color: "white",
+                  "& label": { color: "white" },
+                }}
                 value={bio.value}
                 onChange={bio.changeHandler}
               />
@@ -264,6 +309,14 @@ const Login = () => {
                 label="Password"
                 margin="normal"
                 type="password"
+                InputProps={{
+                  style: { color: "white" },
+                }}
+                sx={{
+                  backgroundColor: "#2F5F5F",
+                  color: "white",
+                  "& label": { color: "white" },
+                }}
                 variant="outlined"
                 value={password.value}
                 onChange={password.changeHandler}
@@ -292,7 +345,7 @@ const Login = () => {
               <Button
                 variant="text"
                 fullWidth
-                color="primary"
+                color="white"
                 onClick={toggleLogin}
               >
                 Login
