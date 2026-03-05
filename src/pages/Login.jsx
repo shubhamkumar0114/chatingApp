@@ -45,7 +45,7 @@ const Login = () => {
   // --------------------Signup Handler-----------------------
   const handleSign = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    
     const formData = new FormData();
     formData.append("avatar", avatar);
     formData.append("name", name.value);
@@ -53,6 +53,7 @@ const Login = () => {
     formData.append("password", password.value);
     formData.append("bio", bio.value);
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${server}/api/v1/user/register`,
         formData,
@@ -78,6 +79,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const res = await axios.post(
         `${server}/api/v1/user/login`,
         {
@@ -95,8 +97,11 @@ const Login = () => {
       localStorage.setItem("token", res?.data?.token);
       dispatch(userExist(res?.data?.user));
       toast.success(res?.data.message);
+      setLoading(false);
     } catch (error) {
       toast.error(error?.response?.data?.message);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -181,7 +186,7 @@ const Login = () => {
                 fullWidth
                 type="submit"
               >
-                Login
+                {loading ? <LoaderIcon/> : "Login"}
               </Button>
 
               <Typography textAlign={"center"} m={"1rem"}>
@@ -329,6 +334,7 @@ const Login = () => {
               <Button
                 sx={{
                   marginTop: "1rem",
+                  padding: "0.6rem"
                 }}
                 variant="contained"
                 color="primary"

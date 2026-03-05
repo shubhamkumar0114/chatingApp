@@ -15,11 +15,10 @@ const LayoutLoader = () => {
         <Grid
           sx={{
             width: 500, // fixed sidebar
-
             display: { xs: "none", md: "block" },
           }}
         >
-          <Skeleton variant="rectangular" height={"100vh"} />
+          <Skeleton variant="rectangular" height={"100dvh"} />
         </Grid>
 
         {/* CENTER (AUTO EXPAND) */}
@@ -28,7 +27,7 @@ const LayoutLoader = () => {
             flexGrow: 1, // ⭐ full remaining width
           }}
         >
-          <Skeleton variant="rectangular" />
+          <Skeleton variant="rectangular" height={"100dvh"} />
         </Grid>
 
         {/* RIGHT */}

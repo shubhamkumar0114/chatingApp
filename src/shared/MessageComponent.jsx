@@ -15,6 +15,7 @@ const MessageComponent = ({ message, user }) => {
   const timeAgo = moment(createdAt).fromNow();
 
   return (
+    
     <div
       style={{
         alignSelf: sameSender ? "flex-end" : "flex-start",

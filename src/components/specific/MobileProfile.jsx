@@ -35,6 +35,7 @@ const MobileProfile = () => {
       toast.error(error?.response?.data?.message);
     }
   };
+  
   return (
     <Dialog
       open={isProfile}

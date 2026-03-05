@@ -2,7 +2,7 @@ import {
   AttachFile as AttachFileIcon,
   Send as SendIcon,
 } from "@mui/icons-material";
-import { IconButton, Stack } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import { useCallback, useRef, useState } from "react";
 import FileMenu from "../components/dialogs/FileMenu";
 import AppLayout from "../components/layout/AppLayout";
@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 import { setIsFileMenu } from "../redux/reducers/miscSlice";
 import { useEffect } from "react";
 import { removeNewMessagesAlert } from "../redux/reducers/chat";
-
 
 const Chat = ({ chatId, user }) => {
   const containerRef = useRef(null);
@@ -119,7 +118,6 @@ const Chat = ({ chatId, user }) => {
     setFileAnchor(e.currentTarget);
   };
 
-
   const eventHandler = {
     [NEW_MESSAGE]: newMessage,
     [START_TYPING]: startypingListener,
@@ -128,10 +126,10 @@ const Chat = ({ chatId, user }) => {
   useSocketEvents(socket, eventHandler);
   useErrors(errors);
 
-
   return (
     <>
-      <Stack className="scrollbar"
+      <Stack
+        className="scrollbar"
         ref={containerRef}
         boxSizing={"border-box"}
         padding={"0.5rem"}
@@ -140,14 +138,25 @@ const Chat = ({ chatId, user }) => {
         sx={{
           overflowX: "hidden",
           overflowY: "scroll",
-          backgroundColor: "DarkSlateGray"
+          backgroundColor: "DarkSlateGray",
         }}
       >
         {/* ----------------message-render--------------- */}
 
-        {allMessages?.map((i) => (
-          <MessageComponent key={i._id} message={i} user={user} />
-        ))}
+        {allMessages.length === 0 ? (
+          <Typography sx={{
+            color: "#BFBFBF",
+            translate: "-0% 900%",
+            textAlign: "center",
+            alignContent: "center",
+            fontSize: "1.1rem"
+
+          }}>Start Conversation</Typography>
+        ) : (
+          allMessages?.map((i) => (
+            <MessageComponent key={i._id} message={i} user={user} />
+          ))
+        )}
         <div ref={scrollRef} />
         {userTyping && (
           <div
@@ -177,7 +186,7 @@ const Chat = ({ chatId, user }) => {
               rotate: "30deg",
               marginLeft: "0.3rem",
               backgroundColor: "GrayText",
-              color: "white"
+              color: "white",
             }}
             onClick={handleFileOpen}
           >
