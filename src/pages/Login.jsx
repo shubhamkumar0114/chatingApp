@@ -131,7 +131,9 @@ const Login = () => {
       >
         {isLogin ? (
           <>
-            <Typography variant="h5">Login</Typography>
+            <Typography variant="h5" sx={{
+              color: "Aqua"
+            }}>Login</Typography>
             <form
               onSubmit={handleLogin}
               style={{
@@ -150,10 +152,13 @@ const Login = () => {
                 sx={{
                   backgroundColor: "#2F5F5F",
                   color: "white",
+                  borderRadius: "0.8rem",
+                  outline: "none",
+                  // overflow: "hidden",
                   "& label": { color: "white" },
                 }}
                 InputProps={{
-                  style: { color: "white" },
+                  style: { color: "white",borderRadius: "0.8rem" },
                 }}
                 onChange={username.changeHandler}
               />
@@ -169,17 +174,22 @@ const Login = () => {
                 sx={{
                   backgroundColor: "#2F5F5F",
                   color: "white",
-                  "& label": { color: "white" },
+                  borderRadius: "0.8rem",
+                  outline: "none",
+                  // overflow: "hidden",
+                  "& label": { color: "white"},
                 }}
                 value={password.value}
                 InputProps={{
-                  style: { color: "white" },
+                  style: { color: "white" ,borderRadius: "0.8rem"},
                 }}
                 onChange={password.changeHandler}
               />
               <Button
                 sx={{
                   marginTop: "1rem",
+                  padding: "0.8rem",
+                  borderRadius: "0.8rem"
                 }}
                 variant="contained"
                 color="primary"
@@ -206,7 +216,9 @@ const Login = () => {
           </>
         ) : (
           <>
-            <Typography variant="h5">Register</Typography>
+            <Typography variant="h5" sx={{
+              color: "Aqua"
+            }}>Register</Typography>
             <form
               onSubmit={handleSign}
               style={{
@@ -217,8 +229,8 @@ const Login = () => {
               <Stack position={"relative"} width={"7rem"} margin={"auto"}>
                 <Avatar
                   sx={{
-                    width: "6rem",
-                    height: "6rem",
+                    width: "5rem",
+                    height: "5rem",
                     objectFit: "contain",
                   }}
                   src={avatarPreview}
@@ -229,7 +241,7 @@ const Login = () => {
                     position: "absolute",
                     bottom: 0,
                     right: 0,
-                    bgcolor: "rgba(0,0,0,0.7)",
+                    bgcolor: "rgba(0, 0, 0, 0.28)",
                     color: "white",
                     ":hover": { bgcolor: "rgba(0,0,0,0.2)" },
                   }}
@@ -253,11 +265,12 @@ const Login = () => {
                 margin="normal"
                 variant="outlined"
                 InputProps={{
-                  style: { color: "white" },
+                  style: { color: "white",borderRadius: "0.8rem" },
                 }}
                 sx={{
                   backgroundColor: "#2F5F5F",
                   color: "white",
+                  borderRadius: "0.8rem",
                   "& label": { color: "white" },
                 }}
                 value={name.value}
@@ -272,10 +285,11 @@ const Login = () => {
                 margin="normal"
                 variant="outlined"
                 InputProps={{
-                  style: { color: "white" },
+                  style: { color: "white" , borderRadius: "0.8rem", border: "none"},
                 }}
                 sx={{
                   backgroundColor: "#2F5F5F",
+                  borderRadius: "0.8rem",
                   color: "white",
                   "& label": { color: "white" },
                 }}
@@ -296,11 +310,12 @@ const Login = () => {
                 type="text"
                 variant="outlined"
                 InputProps={{
-                  style: { color: "white" },
+                  style: { color: "white",borderRadius: "0.8rem" },
                 }}
                 sx={{
                   backgroundColor: "#2F5F5F",
                   color: "white",
+                  borderRadius: "0.8rem",
                   "& label": { color: "white" },
                 }}
                 value={bio.value}
@@ -315,11 +330,12 @@ const Login = () => {
                 margin="normal"
                 type="password"
                 InputProps={{
-                  style: { color: "white" },
+                  style: { color: "white" ,borderRadius: "0.8rem"},
                 }}
                 sx={{
                   backgroundColor: "#2F5F5F",
                   color: "white",
+                  borderRadius: "0.8rem",
                   "& label": { color: "white" },
                 }}
                 variant="outlined"
@@ -334,7 +350,8 @@ const Login = () => {
               <Button
                 sx={{
                   marginTop: "1rem",
-                  padding: "0.6rem"
+                  padding: "0.6rem",
+                  borderRadius: "0.4rem"
                 }}
                 variant="contained"
                 color="primary"
